@@ -1,0 +1,51 @@
+---
+- hosts: localhost
+  tasks:
+      - name: upgrading python-pip
+        command:
+          cmd: pip install --upgrade pip
+
+      - name: Install packages required for ansible mysql modules
+        yum: name={{ item }} state=present
+        with_items:
+          - python-devel
+          - mysql-devel
+          - gcc
+
+      - pip:
+          requirements: /home/requirements.txt
+          state: present
+
+#--------------installation and configuration of MySQL----------------------
+      - name: downloading repo
+        command:
+          cmd: wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm -P /tmp/
+
+     
+      - name: download install
+        yum:
+          name: /tmp/mysql57-community-release-el7-9.noarch.rpm
+          state: present
+
+      - name: install mysql-server
+        yum: name=mysql-community-server state=present
+
+      - name: restart mysqld service
+        service: name=mysqld state=restarted
+
+#------------need to fix the password issue for sql root user----------------------------
+#----------------------------------------------------------------------------------------    
+#     - name: create mysql database
+#       mysql_db: name=cloudportal01 state=present
+#
+#     - name: create user admin
+#       mysql_user: name=admin password=Pass@123 priv=*.*:ALL host=localhost state=present
+#-----------------------------------------------------------------------------------------
+
+      - name: migrating the python file
+        command: python /home/cmu_git/private-cloud-v2/manage.py migrate
+
+      - name: Loading Initial JSON Data
+        command: python /home/cmu_git/private-cloud-v2/manage.py loaddata /home/cmu_git/private-cloud-v2/cloudapp/fixtures/initial.json
+
+#------------run the ./ runserver file------------

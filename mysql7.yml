@@ -1,0 +1,31 @@
+---
+- hosts: 192.168.33.8
+  tasks:
+#--------------------------downloading repo working fine------------------------------
+      - name: downloading repo
+        command:
+          cmd: wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm -P /tmp/
+
+#----------------------------repo working fine with yum---------------------------------
+      - name: download install
+        yum:
+          name: /tmp/mysql57-community-release-el7-9.noarch.rpm
+          state: present
+    
+#---------------- installing mysql, restart, creation of DB, creation of user working fine------
+#
+      - name: install mysql-server
+        yum: name=mysql-community-server state=present
+
+      - name: restart mysqld service
+        service: name=mysqld state=restarted
+
+#-------need to rest the root password for mysql and create ~/.my.cre file with credential------
+#
+#      - name: create mysql database 
+#        mysql_db: name=cloudportal01 state=present
+
+#      - name: create user admin
+#        mysql_user: name=admin password=Pass@123 priv=*.*:ALL host=localhost state=present
+#
+#
