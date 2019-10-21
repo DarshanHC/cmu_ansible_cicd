@@ -5,7 +5,7 @@ JsonSir==0.0.2
 MarkupSafe==1.0
 Python-EasyConfig==0.1.7
 Resource==0.2.1
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 argparse==1.2.1
 awscli==1.15.4
 beautifulsoup4==4.6.0
