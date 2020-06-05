@@ -1,4 +1,4 @@
-Django==1.11.12
+Django==1.11.29
 Jinja2==2.10
 JsonForm==0.0.2
 JsonSir==0.0.2
