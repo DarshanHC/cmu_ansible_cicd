@@ -1,5 +1,5 @@
 Django==1.11.12
-Jinja2==2.10
+Jinja2==2.11.3
 JsonForm==0.0.2
 JsonSir==0.0.2
 MarkupSafe==1.0
