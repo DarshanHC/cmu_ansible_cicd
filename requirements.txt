@@ -58,7 +58,7 @@ requests-oauthlib==0.8.0
 requests-toolbelt==0.8.0
 rq==0.10.0
 rq-scheduler==0.8.3
-rsa==3.4.2
+rsa==4.7
 s3transfer==0.1.13
 selenium==3.11.0
 simplejson==3.13.2
